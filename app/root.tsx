@@ -1,4 +1,8 @@
-import {type LinksFunction, type LoaderArgs} from '@shopify/remix-oxygen';
+import {
+  defer,
+  type LinksFunction,
+  type LoaderArgs,
+} from '@shopify/remix-oxygen';
 import {
   Links,
   Meta,
@@ -8,12 +12,15 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import type {Shop} from '@shopify/hydrogen/storefront-api-types';
-import styles from './styles/app.css';
+import stylesheet from './styles/app.css';
 import favicon from '../public/favicon.svg';
+import {Layout} from './components/Layout';
+import {Seo} from '@shopify/hydrogen';
+import {getCart} from './routes/cart/utils';
 
 export const links: LinksFunction = () => {
   return [
-    {rel: 'stylesheet', href: styles},
+    {rel: 'stylesheet', href: stylesheet},
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
@@ -27,13 +34,20 @@ export const links: LinksFunction = () => {
 };
 
 export async function loader({context}: LoaderArgs) {
-  const layout = await context.storefront.query<{shop: Shop}>(LAYOUT_QUERY);
-  return {layout};
+  const layout = context.storefront.query<{shop: Shop}>(LAYOUT_QUERY);
+  const cartId = context.session.get('cartId');
+  const cart = getCart(context, cartId);
+
+  return defer({
+    cart: (await cartId) ? cart : undefined,
+    layout: await layout,
+  });
 }
 
 export default function App() {
   const data = useLoaderData<typeof loader>();
 
+  // @ts-expect-error incorrect type from loader
   const {name} = data.layout.shop;
 
   return (
@@ -41,13 +55,14 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <Seo />
         <Meta />
         <Links />
       </head>
-      <body>
-        <h1>Hello, {name}</h1>
-        <p>This is a custom storefront powered by Hydrogen</p>
-        <Outlet />
+      <body className="font-sans antialiased">
+        <Layout title={name}>
+          <Outlet />
+        </Layout>
         <ScrollRestoration />
         <Scripts />
       </body>
