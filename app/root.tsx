@@ -35,11 +35,10 @@ export const links: LinksFunction = () => {
 
 export async function loader({context}: LoaderArgs) {
   const layout = context.storefront.query<{shop: Shop}>(LAYOUT_QUERY);
-  const cartId = context.session.get('cartId');
-  const cart = getCart(context, cartId);
+  const cartId: string | undefined = await context.session.get('cartId');
 
   return defer({
-    cart: (await cartId) ? cart : undefined,
+    cart: cartId ? getCart(context, cartId) : undefined,
     layout: await layout,
   });
 }
