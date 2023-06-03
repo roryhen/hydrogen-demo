@@ -36,23 +36,24 @@ export default function ProductGrid({
   }, [fetcher.data]);
 
   return (
-    <section className="w-full gap-4 md:gap-8 grid">
-      <div className="grid-flow-row grid gap-2 gap-y-6 md:gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-      {nextPage && (
-        <div className="flex items-center justify-center mt-6">
+    <section className="px-6 pb-10 md:px-8 md:pb-12">
+      <div className="max-w-screen-xl mx-auto gap-10 md:gap-14 grid">
+        <div className="grid-flow-row grid gap-2 gap-y-6 md:gap-4 md:gap-y-6 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+        {nextPage && (
           <button
-            className="inline-block rounded font-medium text-center py-3 px-6 border w-full cursor-pointer"
+            className="md:justify-self-center rounded-xl font-medium text-center py-3 px-6 border cursor-pointer"
             disabled={fetcher.state !== 'idle'}
             onClick={fetchMoreProducts}
+            type="button"
           >
             {fetcher.state !== 'idle' ? 'Loading...' : 'Load more products'}
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 }

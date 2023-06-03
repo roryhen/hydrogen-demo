@@ -46,19 +46,17 @@ export default function ProductHandle() {
   const orderable = selectedVariant?.availableForSale || false;
 
   return (
-    <section className="w-full gap-4 md:gap-8 grid px-6 md:px-8 lg:px-12">
-      <div className="grid items-start gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
-        <div className="grid md:grid-flow-row  md:p-0 md:overflow-x-hidden md:grid-cols-2 md:w-full lg:col-span-2">
-          <div className="md:col-span-2 snap-center card-image aspect-square md:w-full w-[80vw] shadow rounded">
-            <ProductGallery media={product.media.nodes} />
-          </div>
+    <section className="px-6 py-10 md:px-8 md:py-12">
+      <div className="mx-auto max-w-screen-xl grid items-start gap-6 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <ProductGallery media={product.media.nodes} />
         </div>
-        <div className="md:sticky md:mx-auto max-w-xl md:max-w-[24rem] grid gap-8 p-0 md:p-6 md:px-0 top-[6rem] lg:top-[8rem] xl:top-[10rem]">
+        <div className="md:sticky md:mx-auto max-w-xl md:max-w-sm grid gap-8 md:py-6 md:px-0 md:top-36">
           <div className="grid gap-2">
             <h1 className="text-4xl font-bold leading-10 whitespace-normal">
               {product.title}
             </h1>
-            <span className="max-w-prose whitespace-pre-wrap inherit text-copy opacity-50 font-medium">
+            <span className="max-w-prose whitespace-pre-wrap inherit text-gray-500 dark:text-zinc-400 font-medium">
               {product.vendor}
             </span>
           </div>
@@ -72,7 +70,7 @@ export default function ProductHandle() {
             className="text-xl font-semibold mb-2"
           />
           {orderable && (
-            <div className="space-y-2">
+            <div className="space-y-4">
               <ShopPayButton
                 storeDomain={storeDomain}
                 variantIds={[selectedVariant?.id]}
@@ -83,7 +81,7 @@ export default function ProductHandle() {
             </div>
           )}
           <div
-            className="prose border-t border-gray-200 pt-6 text-black text-md"
+            className="prose border-t border-gray-200 pt-6 text-black text-md dark:text-zinc-400"
             dangerouslySetInnerHTML={{__html: product.descriptionHtml}}
           ></div>
         </div>

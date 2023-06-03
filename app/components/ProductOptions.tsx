@@ -68,7 +68,9 @@ export default function ProductOptions({
                     preventScrollReset
                     replace
                     className={`leading-none py-1 border-b-[1.5px] cursor-pointer transition-all duration-200 ${
-                      isSelected ? 'border-gray-500' : 'border-neutral-50'
+                      isSelected
+                        ? 'border-gray-500 dark:border-lime-500'
+                        : 'border-neutral-50 dark:border-zinc-600'
                     }`}
                   >
                     {value}

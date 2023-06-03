@@ -28,20 +28,20 @@ export function Layout({children, title}: Props) {
   }, [addToCartFetchers, isOpen, openDrawer]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-neutral-50">
+    <div className="flex flex-col min-h-screen bg-neutral-50 dark:bg-zinc-800 dark:text-zinc-100">
       <header
         role="banner"
-        className="p-6 lg:p-8 sticky backdrop-blur-lg z-40 top-0 leading-none transition shadow-sm"
+        className="p-6 md:p-8 sticky backdrop-blur-lg z-40 top-0 leading-none transition shadow-sm dark:shadow-none dark:border-b"
       >
         <div className="flex gap-12 justify-between items-center">
-          <a className="font-bold" href="/">
+          <a className="font-bold text-xl" href="/">
             {title}
           </a>
           <CartHeader cart={cart} openDrawer={openDrawer} />
         </div>
       </header>
 
-      <main role="main" id="mainContent" className="flex-grow p-6 lg:p-8">
+      <main role="main" id="mainContent" className="flex-grow flex flex-col">
         {children}
         <Drawer open={isOpen} onClose={closeDrawer}>
           <CartDrawer cart={cart} close={closeDrawer} />

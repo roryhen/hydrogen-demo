@@ -50,20 +50,22 @@ export default function Collection() {
 
   return (
     <>
-      <header className="grid w-full gap-8 py-8 justify-items-start">
-        <h1 className="text-4xl whitespace-pre-wrap font-bold inline-block">
-          {collection.title}
-        </h1>
+      <header className="px-6 py-10 md:px-8 md:py-12">
+        <div className="mx-auto max-w-screen-xl grid gap-8 justify-items-start">
+          <h1 className="text-4xl whitespace-pre-wrap font-bold inline-block">
+            {collection.title}
+          </h1>
 
-        {collection.description && (
-          <div className="flex items-baseline justify-between w-full">
-            <div>
-              <p className="max-w-md whitespace-pre-wrap inherit text-copy inline-block">
-                {collection.description}
-              </p>
+          {collection.description && (
+            <div className="flex items-baseline justify-between w-full">
+              <div>
+                <p className="max-w-md whitespace-pre-wrap inherit text-copy dark:text-zinc-300">
+                  {collection.description}
+                </p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </header>
       <ProductGrid
         collection={collection as Collection}

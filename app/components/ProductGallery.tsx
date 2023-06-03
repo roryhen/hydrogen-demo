@@ -19,7 +19,7 @@ export default function ProductGallery({
 
   return (
     <div
-      className={`grid gap-4 overflow-x-scroll grid-flow-col md:grid-flow-row  md:p-0 md:overflow-x-auto md:grid-cols-2 w-[90vw] md:w-full lg:col-span-2`}
+      className={`-ms-6 md:ms-0 px-6 md:px-2 pb-4 grid gap-4 overflow-x-auto snap-x grid-flow-col md:grid-flow-row  md:grid-cols-2 w-screen md:w-full lg:col-span-2`}
     >
       {media.map((med, i) => {
         let extraProps = {};
@@ -43,12 +43,12 @@ export default function ProductGallery({
           <div
             className={`${
               i % 3 === 0 ? 'md:col-span-2' : 'md:col-span-1'
-            } snap-center card-image bg-white aspect-square md:w-full w-[80vw] shadow-sm rounded`}
+            } snap-center card-image bg-white aspect-square md:w-full w-[calc(100vw-3rem)] shadow-md rounded-xl`}
             key={med.id}
           >
             <MediaFile
               tabIndex={0}
-              className={`w-full h-full aspect-square object-cover`}
+              className={`w-full h-full aspect-square object-cover rounded-xl`}
               data={data as typeof med}
               {...extraProps}
             />

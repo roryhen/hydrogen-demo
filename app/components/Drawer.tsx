@@ -46,8 +46,8 @@ function Drawer({
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="max-w-lg transform text-left align-middle shadow-xl transition-all antialiased bg-neutral-50 flex flex-col">
-                  <header className="sticky top-0 flex items-center justify-between p-4 sm:px-8 md:px-12 flex-0">
+                <Dialog.Panel className="max-w-lg transform text-left align-middle shadow-xl transition-all bg-neutral-50 dark:bg-zinc-800 flex flex-col dark:text-zinc-100">
+                  <header className="sticky top-0 flex items-center justify-between p-4 pe-2 md:px-12 md:pe-8 flex-0">
                     <h2
                       id="cart-contents"
                       className="whitespace-pre-wrap max-w-prose font-bold text-lg"
@@ -56,7 +56,7 @@ function Drawer({
                     </h2>
                     <button
                       type="button"
-                      className="p-4 transition text-primary hover:text-primary/50"
+                      className="p-4 transition"
                       onClick={onClose}
                       title="Close"
                     >
@@ -138,19 +138,19 @@ export function CartDrawer({cart, close}: {cart: Cart; close: () => void}) {
                     <CartLineItems linesObj={data.lines} />
                   </div>
                 </div>
-                <div className="w-full md:px-12 px-4 py-6 space-y-6 border border-1 border-gray-00">
+                <div className="w-full md:px-12 px-4 py-6 space-y-6 border border-1 border-gray-50 dark:border-0 dark:border-t">
                   <CartSummary cost={data.cost} />
                   <CartActions checkoutUrl={data.checkoutUrl} />
                 </div>
               </>
             ) : (
-              <div className="flex flex-col space-y-7 justify-center items-center md:py-8 md:px-12 px-4 py-6 h-screen">
+              <div className="flex-grow flex flex-col space-y-7 justify-center items-center md:py-8 md:px-12 px-4 py-6">
                 <h2 className="whitespace-pre-wrap max-w-prose font-bold text-4xl">
                   Your cart is empty
                 </h2>
                 <button
                   onClick={close}
-                  className="inline-block rounded-sm font-medium text-center py-3 px-6 max-w-xl leading-none bg-black text-white w-full"
+                  className="inline-block rounded-xl font-medium text-center py-3 px-6 max-w-xl leading-none bg-black text-white w-full dark:bg-lime-400 dark:text-lime-950"
                   type="button"
                 >
                   Continue shopping

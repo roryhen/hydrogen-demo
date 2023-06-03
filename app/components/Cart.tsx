@@ -24,7 +24,12 @@ function LineItem({lineItem}: {lineItem: CartLine}) {
         className="flex-shrink-0"
       >
         {merchandise.image && (
-          <Image data={merchandise.image} width={110} height={110} />
+          <Image
+            className="rounded-xl shadow-sm"
+            data={merchandise.image}
+            width={110}
+            height={110}
+          />
         )}
       </Link>
       <div className="flex-1">
@@ -34,8 +39,12 @@ function LineItem({lineItem}: {lineItem: CartLine}) {
         >
           {merchandise.product.title}
         </Link>
-        <div className="text-gray-800 text-sm">{merchandise.title}</div>
-        <div className="text-gray-800 text-sm">Qty: {quantity}</div>
+        <div className="text-gray-800 text-sm dark:text-zinc-400">
+          {merchandise.title}
+        </div>
+        <div className="text-gray-800 text-sm dark:text-zinc-400">
+          Qty: {quantity}
+        </div>
         <ItemRemoveButton lineIds={[lineItem.id]} />
       </div>
       <Money data={lineItem.cost.totalAmount} />
@@ -124,7 +133,7 @@ export function CartActions({checkoutUrl}: {checkoutUrl: Cart['checkoutUrl']}) {
     <div className="flex flex-col mt-2">
       <a
         href={checkoutUrl}
-        className="bg-black text-white px-6 py-3 w-full rounded-md text-center font-medium"
+        className="bg-black text-white px-6 py-3 w-full rounded-xl text-center font-medium dark:bg-lime-400 dark:text-lime-950"
       >
         Continue to Checkout
       </a>
